@@ -6,6 +6,10 @@
   "scripts": {
     "build": "webpack -c"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franciscop/use-animation-frame.git"
+  },
   "keywords": [],
   "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
   "license": "MIT",
