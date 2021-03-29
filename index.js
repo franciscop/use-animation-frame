@@ -4,6 +4,10 @@ import { useEffect, useRef } from "react";
 
 // Reusable component that also takes dependencies
 export default (cb, deps) => {
+  if( typeof performance === 'undefined' || typeof window === 'undefined' ) {
+    return
+  }
+
   const frame = useRef();
   const last = useRef(performance.now());
   const init = useRef(performance.now());
