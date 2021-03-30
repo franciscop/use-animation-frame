@@ -10,7 +10,8 @@ module.exports = {
     filename: "index.min.js",
     library: pkg.name,
     libraryTarget: "umd",
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    globalObject: 'this'
   },
   module: {
     rules: [
