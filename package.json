@@ -1,10 +1,12 @@
 {
   "name": "use-animation-frame",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React hook to run requestAnimationFrame seamlessly",
   "homepage": "https://github.com/franciscop/use-animation-frame#readme",
   "repository": "https://github.com/franciscop/use-animation-frame.git",
-  "funding": "https://www.paypal.me/franciscopresencia/19",
+  "funding": {
+    "url": "https://www.paypal.me/franciscopresencia/19"
+  },
   "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
   "license": "MIT",
   "scripts": {
