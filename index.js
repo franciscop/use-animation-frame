@@ -1,11 +1,11 @@
 // Based off a tweet and codesandbox:
 // https://mobile.twitter.com/hieuhlc/status/1164369876825169920
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 // Reusable component that also takes dependencies
 export default (cb, deps) => {
-  if( typeof performance === 'undefined' || typeof window === 'undefined' ) {
-    return
+  if (typeof performance === "undefined" || typeof window === "undefined") {
+    return;
   }
 
   const frame = useRef();
@@ -22,7 +22,7 @@ export default (cb, deps) => {
     frame.current = requestAnimationFrame(animate);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     frame.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame.current);
   }, deps); // Make sure to change it if the deps change
