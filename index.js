@@ -3,27 +3,30 @@
 import { useLayoutEffect, useRef } from "react";
 
 // Reusable component that also takes dependencies
-export default (cb, deps) => {
+export default (cb) => {
   if (typeof performance === "undefined" || typeof window === "undefined") {
     return;
   }
 
+  const cbRef = useRef();
   const frame = useRef();
-  const last = useRef(performance.now());
   const init = useRef(performance.now());
+  const last = useRef(performance.now());
 
-  const animate = () => {
-    const now = performance.now();
-    const time = (now - init.current) / 1000;
-    const delta = (now - last.current) / 1000;
+  cbRef.current = cb;
+
+  const animate = (now) => {
     // In seconds ~> you can do ms or anything in userland
-    cb({ time, delta });
+    cbRef.current({
+      time: (now - init.current) / 1000,
+      delta: (now - last.current) / 1000,
+    });
     last.current = now;
     frame.current = requestAnimationFrame(animate);
   };
 
   useLayoutEffect(() => {
     frame.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame.current);
-  }, deps); // Make sure to change it if the deps change
+    return () => frame.current && cancelAnimationFrame(frame.current);
+  }, []);
 };

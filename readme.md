@@ -7,7 +7,7 @@ import useAnimationFrame from 'use-animation-frame';
 
 const Counter = () => {
   const [time, setTime] = useState(0);
-  useAnimationFrame(e => setTime(e.time), []);
+  useAnimationFrame(e => setTime(e.time));
   return <div>Running for:<br/>{time.toFixed(1)}s</div>;
 };
 ```
@@ -16,20 +16,18 @@ Inspired by [CSS-Tricks' Using requestAnimationFrame with React Hooks](https://c
 
 ## API
 
-Accepts first a function and second a dependency list similar to `useEffect()`:
+Accepts a function that will be called on each requestAnimationFrame step. If there's a re-render and a new function is created, it'll use that instead of the previous one:
 
 ```js
-useAnimationFrame(callback, dependencies);
+useAnimationFrame(callback);
 ```
 
-The callback will be called _on each requestAnimationFrame_. Also it's very likely that you want to **provide dependencies or [] if there's none** to avoid infinite loops and unnecessary re-renders.
-
-The callback accepts a single parameter, which is an object with two properties (based on [the `performance.now()` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)):
+The callback receives a single parameter, which is an object with two properties (based on [the `performance.now()` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)):
 
 - `time`: the absolute time _since the hook was first mounted_. This is useful for wall clock, general time, etc.
 - `delta`: the time _since the hook was run last_. This is useful to measure e.g. FPS.
 
-All times are in the International System of Units seconds, including decimals.
+All times are in the International System of Units **seconds**, including decimals.
 
 
 ## Example: FPS counter
@@ -48,7 +46,7 @@ const Counter = () => {
   useAnimationFrame(e => {
     setFps(1 / e.delta);
     setTime(e.time);
-  }, []);
+  });
   return (
     <div>
       {time.toFixed(1)}s
