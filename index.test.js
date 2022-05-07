@@ -17,7 +17,7 @@ describe("use-animation-frame", () => {
     };
     const $counter = $(<Counter />);
     expect($counter.text()).toBe("0.0s");
-    await delay(1000);
+    await $counter.delay(1000);
     expect($counter.text()).toBe("1.0s");
   });
 
@@ -32,11 +32,11 @@ describe("use-animation-frame", () => {
     };
     const $counter = $(<Changer />);
     expect($counter.text()).toBe("hello");
-    await delay(1000);
+    await $counter.delay(1000);
     expect($counter.text()).toBe("hello");
     await $counter.click();
     expect($counter.text()).toBe("bye");
-    await delay(1000);
+    await $counter.delay(1000);
     expect($counter.text()).toBe("bye");
   });
 });
