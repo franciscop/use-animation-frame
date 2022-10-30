@@ -1,12 +1,7 @@
-/**
- * @jest-environment jsdom
- */
 import "babel-polyfill";
 import React, { useState } from "react";
 import $ from "react-test";
 import useAnimationFrame from "./index.js";
-
-const delay = (t) => new Promise((done) => setTimeout(done, t));
 
 describe("use-animation-frame", () => {
   it("renders properly for 1 second", async () => {
