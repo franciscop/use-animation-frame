@@ -17,8 +17,10 @@ describe("use-animation-frame", () => {
   });
 
   it("changes the value on dep change. Test for #4", async () => {
+    let c = false;
     const Changer = () => {
       const [clicked, setClicked] = useState(false);
+      c = clicked;
       const [out, setOut] = useState("hello");
       useAnimationFrame(() => {
         setOut(clicked ? "bye" : "hello");
@@ -30,6 +32,8 @@ describe("use-animation-frame", () => {
     await $counter.delay(1000);
     expect($counter.text()).toBe("hello");
     await $counter.click();
+    expect(c).toBe(true);
+    await $counter.delay(100); // React act waits for the render of setClicked(), but not for the re-render within useAnimationFrame
     expect($counter.text()).toBe("bye");
     await $counter.delay(1000);
     expect($counter.text()).toBe("bye");
