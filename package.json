@@ -1,6 +1,6 @@
 {
   "name": "use-animation-frame",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "A React hook to run requestAnimationFrame seamlessly",
   "homepage": "https://github.com/franciscop/use-animation-frame#readme",
   "repository": "https://github.com/franciscop/use-animation-frame.git",
