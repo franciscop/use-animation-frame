@@ -12,7 +12,7 @@
     "build": "rollup -c",
     "size": "echo $(gzip -c index.min.js | wc -c) bytes",
     "start": "jest --watch",
-    "test": "jest --coverage"
+    "test": "jest --coverage && npx check-dts"
   },
   "keywords": [
     "react",
@@ -23,13 +23,18 @@
   ],
   "main": "index.min.js",
   "type": "module",
-  "files": [],
+  "types": "src/index.d.ts",
+  "files": [
+    "src/index.d.ts"
+  ],
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",
+    "check-dts": "^0.8.2",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.0",
     "react": "^18.2.0",
