@@ -2,7 +2,7 @@
 
 A hook to effortlessly run [`requestAnimationFrame()`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) in React ([**demo**](https://codesandbox.io/s/fps-counter-8jfdg)):
 
-```js
+```tsx
 import useAnimationFrame from 'use-animation-frame';
 
 const Counter = () => {
@@ -16,36 +16,56 @@ Inspired by [CSS-Tricks' Using requestAnimationFrame with React Hooks](https://c
 
 ## API
 
-Accepts a function that will be called on each requestAnimationFrame step. If there's a re-render and a new function is created, it'll use that instead of the previous one:
-
-```js
+```tsx
 useAnimationFrame(callback);
 ```
 
-The callback receives a single parameter, which is an object with two properties (based on [the `performance.now()` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)):
+Calls `callback` on every animation frame. The callback receives an object with two properties (based on [the `performance.now()` API](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now)):
 
-- `time`: the absolute time _since the hook was first mounted_. This is useful for wall clock, general time, etc.
-- `delta`: the time _since the hook was run last_. This is useful to measure e.g. FPS.
+- `time`: seconds elapsed _since the hook was first mounted_. Useful for driving animations tied to a wall clock.
+- `delta`: seconds elapsed _since the last frame_. Useful for frame-rate-independent movement; e.g. `1 / e.delta` gives the current FPS.
 
-All times are in the International System of Units **seconds**, including decimals.
+All times are in **seconds** (including decimals).
 
+The callback is stored in a ref, so it always reflects the latest closure — state and props are always up to date without restarting the animation loop. No dependency array needed.
+
+```tsx
+// TypeScript: the callback type is inferred automatically
+useAnimationFrame(({ time, delta }: { time: number; delta: number }) => {
+  // ...
+});
+```
+
+## Example: moving a value
+
+Use `delta` to advance a value independent of frame rate:
+
+```tsx
+import { useState } from 'react';
+import useAnimationFrame from 'use-animation-frame';
+
+const Progress = () => {
+  const [x, setX] = useState(0);
+  useAnimationFrame(({ delta }) => setX(prev => (prev + delta * 100) % 100));
+  return <div style={{ marginLeft: `${x}%` }}>→</div>;
+};
+```
 
 ## Example: FPS counter
 
-With my other library [use-interpolation](https://www.npmjs.com/package/use-interpolation) it's easy to calculate the FPS ([see in CodeSandbox](https://codesandbox.io/s/angry-voice-8jfdg)):
+With my other library [use-interpolation](https://www.npmjs.com/package/use-interpolation) it's easy to smooth the FPS reading ([see in CodeSandbox](https://codesandbox.io/s/angry-voice-8jfdg)):
 
-```js
-import React, { useState } from "react";
+```tsx
+import { useState } from "react";
 import useInterpolation from 'use-interpolation';
 import useAnimationFrame from 'use-animation-frame';
 
 const Counter = () => {
   const [time, setTime] = useState(0);
-  // 1s of interpolation time
-  const [fps, setFps] = useInterpolation(1000);
-  useAnimationFrame(e => {
-    setFps(1 / e.delta);
-    setTime(e.time);
+  const [fps, setFps] = useInterpolation(1000); // 1s smoothing window
+  useAnimationFrame(({ time, delta }) => {
+    setFps(1 / delta);
+    setTime(time);
   });
   return (
     <div>
