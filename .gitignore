@@ -1,5 +1,6 @@
 # Not for libraries
 package-lock.json
+bun.lock
 
 # Logs
 logs

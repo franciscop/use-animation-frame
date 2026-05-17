@@ -1,4 +1,4 @@
-# use-animation-frame
+# use-animation-frame [![use-animation-frame](https://img.shields.io/npm/v/use-animation-frame?label=use-animation-frame&color=greenlime)](https://www.npmjs.com/package/use-animation-frame) [![tests](https://github.com/franciscop/use-animation-frame/workflows/tests/badge.svg)](https://github.com/franciscop/use-animation-frame/actions) [![gzip size](https://img.badgesize.io/franciscop/use-animation-frame/master/index.min.js.svg?label=gzip&logo=&compression=gzip)](https://github.com/franciscop/use-animation-frame/blob/master/index.min.js) [![dependencies](https://img.shields.io/badge/dependencies-0-limegreen.svg)](https://github.com/franciscop/use-animation-frame/blob/master/package.json)
 
 A hook to effortlessly run [`requestAnimationFrame()`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) in React ([**demo**](https://codesandbox.io/s/fps-counter-8jfdg)):
 

@@ -2,11 +2,9 @@
   "name": "use-animation-frame",
   "version": "1.0.0",
   "description": "A React hook to run requestAnimationFrame seamlessly",
-  "homepage": "https://github.com/franciscop/use-animation-frame#readme",
-  "repository": "https://github.com/franciscop/use-animation-frame.git",
-  "bugs": "https://github.com/franciscop/use-animation-frame/issues",
-  "funding": "https://www.paypal.me/franciscopresencia/19",
+  "repository": "github:franciscop/use-animation-frame",
   "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
+  "funding": "https://www.paypal.me/franciscopresencia/19",
   "license": "MIT",
   "keywords": [
     "react",
@@ -42,13 +40,13 @@
     "prettier": "^3.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-test": "^0.24.7",
+    "react-test": "^0.24.12",
     "terser": "^5.46.1",
     "typescript": "^6.0.2",
     "vite": "^8.0.3",
     "vitest": "^4.1.2"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=18.0.0"
   }
 }
