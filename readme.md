@@ -27,7 +27,7 @@ Calls `callback` on every animation frame. The callback receives an object with 
 
 All times are in **seconds** (including decimals).
 
-The callback is stored in a ref, so it always reflects the latest closure — state and props are always up to date without restarting the animation loop. No dependency array needed.
+The callback is stored in a ref, so it always reflects the latest closure: state and props are always up to date without restarting the animation loop. No dependency array needed.
 
 ```tsx
 // TypeScript: the callback type is inferred automatically
